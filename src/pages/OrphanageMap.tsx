@@ -7,6 +7,7 @@ import mapMarker from '../images/map-marker.png';
 import { useFonts } from 'expo-font';
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import { useNavigation } from '@react-navigation/native';
+import { RectButton } from 'react-native-gesture-handler';
 
 export default function OrphanageMap() {
     const navigation = useNavigation();
@@ -25,11 +26,11 @@ export default function OrphanageMap() {
     }
     
     function handleNavigateToMenuOptions() {
-        navigation.navigate('OrphanageDetails');
+        navigation.navigate('MainMenu');
     }
     
     function handleNavigateToCreateOrphanage() {
-        navigation.navigate('OrphanageDetails');
+        navigation.navigate('SelectPosition');
     }
 
     return (
@@ -40,8 +41,8 @@ export default function OrphanageMap() {
                 initialRegion={{
                     latitude: -23.17944,
                     longitude: -45.88694,
-                    latitudeDelta: 0.008,
-                    longitudeDelta: 0.008,
+                    latitudeDelta: 0.05,
+                    longitudeDelta: 0.05,
                 }}>
                 <Marker
                     icon={mapMarker}
@@ -63,18 +64,19 @@ export default function OrphanageMap() {
             </MapView>
 
             {/* ------------------ Menu Opitions ------------------ */}
-            <View style={styles.menuOptionsContainer}>
-                <TouchableOpacity style={styles.menuOptionsButton} onPress={handleNavigateToMenuOptions}>
-                    <Feather name="menu" size={16} color="#4d3f92" />
-                </TouchableOpacity>
-            </View>
+            {/*<View style={styles.menuOptionsContainer}>
+                <RectButton style={styles.menuOptionsButton} onPress={handleNavigateToMenuOptions}>
+                    <Feather name="user" size={16} color="#4d3f92" />
+                    <Text style={styles.menuText}>Menu</Text>
+                </RectButton>
+            </View>*/}
 
             {/* ------------------ FOOTER ------------------ */}
             <View style={styles.footerContainer}>
                 <Text style={styles.footerText}>1 orfanato foi encontrado</Text>
-                <TouchableOpacity style={styles.createOrphanageButton} onPress={handleNavigateToCreateOrphanage}>
+                <RectButton style={styles.createOrphanageButton} onPress={handleNavigateToCreateOrphanage}>
                     <Feather name="plus" size={20} color="#217821" />
-                </TouchableOpacity>
+                </RectButton>
             </View>
             <StatusBar style="auto" />
         </View>
@@ -93,11 +95,11 @@ const styles = StyleSheet.create({
 
     calloutContainer: {
         flex: 1,
-        width: 160,
+        width: 180,
         height: 40,
-        paddingHorizontal: 24,
-        backgroundColor: '#ffc50099',
-        borderRadius: 16,
+        paddingHorizontal: 0,
+        backgroundColor: '#ffffffdd',
+        borderRadius: 12,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -112,26 +114,26 @@ const styles = StyleSheet.create({
         position: "absolute",
         left: 24,
         right: 24,
-        bottom: 32,
-        backgroundColor: 'rgba(255,255,255, 1)',
+        bottom: 64,
+        backgroundColor: '#fff',
         borderRadius: 20,
-        height: 56,
+        height: 64,
         paddingLeft: 24,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        elevation: 5,
+        elevation: 10,
     },
 
     footerText: {
         fontFamily: 'Roboto_700Bold',
-        color: '#5fd35f',
+        color: '#4d3f92',
         fontSize: 18,
     },
 
     createOrphanageButton: {
-        width: 56,
-        height: 56,
+        width: 64,
+        height: 64,
         backgroundColor: '#5fd35f',
         borderRadius: 20,
         justifyContent: 'center',
@@ -140,18 +142,23 @@ const styles = StyleSheet.create({
 
     menuOptionsContainer: {
         position: "absolute",
-        left: 24,
+        right: 24,
         top: 56,
         borderRadius: 20,
-        elevation: 3,
+        elevation: 5,
     },
 
     menuOptionsButton: {
-        width: 32,
-        height: 32,
+        width: 56,
+        height: 56,
         backgroundColor: '#fff',
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },
+    menuText: {
+        fontFamily: 'Roboto_700Bold',
+        color: '#4d3f92',
+        fontSize: 12,
+    }
 });
